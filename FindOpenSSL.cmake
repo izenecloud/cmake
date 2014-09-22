@@ -14,6 +14,23 @@ FIND_LIBRARY(OpenSSL_LIBRARIES
   PATHS /usr/lib /usr/local/lib /usr/lib64
 )
 
+FIND_LIBRARY(CRYPTO_LIBRARY
+  NAMES
+  crypto
+  libcrypto
+  eay
+  eay32
+  libeay
+  libeay32
+  PATHS /usr/lib /usr/local/lib /usr/lib64
+)
+
+IF (CRYPTO_LIBRARY)
+  SET(OpenSSL_LIBRARIES
+      ${CRYPTO_LIBRARY}
+      ${OpenSSL_LIBRARIES}
+     )
+ENDIF (CRYPTO_LIBRARY)
 IF (OpenSSL_INCLUDE_DIR AND OpenSSL_LIBRARIES)
   SET(OpenSSL_FOUND TRUE)
 ELSE (OpenSSL_INCLUDE_DIR AND OpenSSL_LIBRARIES)
